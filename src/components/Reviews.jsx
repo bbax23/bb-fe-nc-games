@@ -7,15 +7,18 @@ const Reviews = ({reviewList, setReviewList}) => {
     }, [setReviewList])
 
     return(
-        <ul>
+        <ul class="rev-list">
             <h2>All Reviews</h2>
             {reviewList.map((review) => {
                 return (
                     <li key={review.review_id}> 
-                    <h3>{review.title}</h3>
-                    <p>Category: {review.category}</p> 
-                    <p>{review.created_at}</p>
-                    <p>Comments: {review.comment_count}{" "}Votes: {review.votes}</p>
+                        <h3>{review.title}</h3>
+                        <p> 
+                            Category: {review.category}{" "}|{" "}
+                            Comments: {review.comment_count}{" "}|{" "}
+                            Votes: {review.votes} <br></br>
+                            {review.created_at}
+                        </p>
                     </li>
                 )
             })}
