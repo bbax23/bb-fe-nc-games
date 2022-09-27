@@ -10,7 +10,7 @@ const Categories = ({category, setCategory}) => {
 
     const handleChange = (e) => {
         e.preventDefault()
-        setCategories([])
+        setCategory("")
     }
 
     return(
@@ -19,7 +19,7 @@ const Categories = ({category, setCategory}) => {
             <form onSubmit={handleChange}>
                 <label htmlFor="categDropDown">Search Category: </label>
                 <select id="categDropDown" value={category} onChange={e => setCategory(e.target.value)}>
-                    <option>Categories</option>
+                    <option key="Categories" value="Categories">Categories</option>
                     {categories.map((categ) => {
                         return (
                             <option key={categ.slug} value={categ.slug}>{categ.slug}</option>
