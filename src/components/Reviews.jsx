@@ -1,23 +1,21 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
-import Categories from './Categories';
+import {useNavigate} from 'react-router-dom'
 
-
-const Reviews = ({reviewList, setReviewList}) => {
-
-    const [category, setCategory] = useState('');
-
+const Reviews = ({category}) => {
+    const [reviewList, setReviewList] = useState([]);
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        if(category) {
-           axios.get(`https://be-games-example-api.herokuapp.com/api/reviews?category=${category}`).then(({data}) => setReviewList(data.reviews))
-        }
-        else if (category === "Categories" || !category) {
+        if (category === "Categories" || !category) {
         axios.get('https://be-games-example-api.herokuapp.com/api/reviews').then(({data}) => setReviewList(data.reviews))
-    }}, [category, setReviewList])
+     } else if(category) {
+        navigate(`/${category}`)
+     }
+    }, [category, setReviewList, navigate])
+
     return(
-        <section>
         <ul>
-            <Categories category={category} setCategory={setCategory}/>
             <h2>Reviews</h2>
             {reviewList.map((review) => {
                 return (
@@ -32,7 +30,7 @@ const Reviews = ({reviewList, setReviewList}) => {
                 )
             })}
         </ul>
-        </section>
+
     )
 }
 

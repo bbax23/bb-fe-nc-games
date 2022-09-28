@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const Categories = ({category, setCategory}) => {
-
+ 
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -12,7 +12,7 @@ const Categories = ({category, setCategory}) => {
         e.preventDefault()
         setCategory("")
     }
-
+    
     return(
         <section>
             <h4>Please use the drop down to search for reviews by the game category.</h4>

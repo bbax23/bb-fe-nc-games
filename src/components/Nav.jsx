@@ -1,10 +1,16 @@
-import {Link} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
-const Nav = () => {
+const Nav = ({setCategory}) => {
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        setCategory("")
+        navigate("/")
+    }
+
     return (
         <nav>
-            <Link to="/">HOME</Link>
-            {/* <Link to="/categories">Categories</Link> */}
+            <button onClick={handleClick}>Home</button>
         </nav>
     )
 }
