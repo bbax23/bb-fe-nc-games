@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect} from 'react'
-import {useParams, useNavigate} from 'react-router-dom'
+import {useParams, useNavigate, Link} from 'react-router-dom'
 
 const Category = ({category}) => {
     const [reviewsByCateg, setReviewsByCateg] = useState([])
@@ -23,8 +23,8 @@ const Category = ({category}) => {
         <ul>
             {reviewsByCateg.map((review) => {
                 return(
-                 <li key={review.review_id}> 
-                 <h3>{review.title}</h3>
+                 <li key={review.review_id}><Link to={`/review-${review.review_id}`}>
+                 <h3>{review.title}</h3></Link> 
                      <p>{review.review_body}</p>
                      <p>Category: {review.category}</p>
                      <p>Comments: {review.comment_count}</p>

@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import Reviews from './components/Reviews';
 import Category from './components/Category';
 import Categories from './components/Categories';
+import Review from './components/SingleReview';
 
 function App() {
   const [category, setCategory] = useState('');
@@ -24,6 +25,7 @@ function App() {
             path="/:category_name"
             element={<Category category={category} />}
           ></Route>
+          <Route path="/review-:review_id" element={<Review />} />
         </Routes>
       </div>
     </BrowserRouter>
