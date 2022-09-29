@@ -1,10 +1,9 @@
 import {useNavigate} from 'react-router-dom'
 
-const Nav = ({setCategory}) => {
+const Nav = () => {
 
     const navigate = useNavigate();
     const handleClick = () => {
-        setCategory("")
         navigate("/")
     }
 

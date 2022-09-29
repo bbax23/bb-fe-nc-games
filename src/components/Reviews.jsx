@@ -1,26 +1,35 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
+import Categories from './Categories';
+import Nav from './Nav';
 
-const Reviews = ({category}) => {
+const Reviews = ({category, setCategory}) => {
     const [reviewList, setReviewList] = useState([]);
-    const navigate = useNavigate();
-    
+    const {category_name} = useParams()
+
     useEffect(() => {
-        if (category === "Categories" || !category) {
+
+        if(category_name){
+            axios.get(`https://be-games-example-api.herokuapp.com/api/reviews?category=${category_name}`).then(({data}) => {
+                setReviewList(data.reviews)
+            })
+        }
+        else {
         axios.get('https://be-games-example-api.herokuapp.com/api/reviews').then(({data}) => setReviewList(data.reviews))
-     } else if(category) {
-        navigate(`/${category}`)
      }
-    }, [category, setReviewList, navigate])
+    }, [category, category_name])
 
     return(
+        <>
+        <Nav category={category} setCategory={setCategory} />
+        <Categories category={category_name} setCategory={setCategory} />
         <ul>
             <h2>Reviews</h2>
             {reviewList.map((review) => {
                 return (
-                    <li key={review.review_id}> 
-                        <h3>{review.title}</h3>
+                    <li key={review.review_id}><Link to={`/reviews/${review.review_id}`}>
+                        <h3>{review.title}</h3></Link> 
                             <p>{review.review_body}</p>
                             <p>Category: {review.category}</p>
                             <p>Comments: {review.comment_count}</p>
@@ -30,7 +39,7 @@ const Reviews = ({category}) => {
                 )
             })}
         </ul>
-
+        </>
     )
 }
 
