@@ -2,11 +2,9 @@ import './App.css';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import Nav from './components/Nav';
 import Reviews from './components/Reviews';
-import Category from './components/Category';
-import Categories from './components/Categories';
 import Review from './components/SingleReview';
+import Errorpage from './components/Errorpage';
 
 function App() {
   const [category, setCategory] = useState('');
@@ -14,8 +12,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Nav category={category} setCategory={setCategory} />
-        <Categories category={category} setCategory={setCategory} />
         <Routes>
           <Route
             path="/"
@@ -23,9 +19,10 @@ function App() {
           ></Route>
           <Route
             path="/:category_name"
-            element={<Category category={category} />}
+            element={<Reviews category={category} setCategory={setCategory} />}
           ></Route>
-          <Route path="/review-:review_id" element={<Review />} />
+          <Route path="/reviews/:review_id" element={<Review />} />
+          <Route path="*" element={<Errorpage />} />
         </Routes>
       </div>
     </BrowserRouter>
