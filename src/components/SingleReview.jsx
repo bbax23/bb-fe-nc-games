@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Comments from "./Comments";
 import Errorpage from "./Errorpage";
 import Nav from "./Nav";
 
@@ -53,6 +54,7 @@ const Review = () => {
                                     </button></p>
                 <p> Review left by {review.owner} on {review.created_at}</p>
             </header>
+            <Comments review_id={review_id}/>
             </>
     )
 }}
