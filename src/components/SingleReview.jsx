@@ -18,6 +18,24 @@ const Review = () => {
         })
     }, [review_id])
 
+    const voteOnReview = () => {
+
+        setReview((review) => {
+            return {...review, votes: review.votes + 1}
+            
+        })
+        const reqBody = {
+            inc_votes: 1,
+        };
+        axios.patch(`https://be-games-example-api.herokuapp.com/api/reviews/${review.review_id}`, reqBody).then(({data}) => {
+            console.log("vote occurred")
+        }).catch((err) => {
+            setReview((review) => {
+                return {...review, votes: review.votes - 1}
+            })
+        })
+    }
+
     if(error){
         return <Errorpage />
     } else {
@@ -30,7 +48,9 @@ const Review = () => {
                 <p>{review.review_body}</p>
                 <p>A(n) {review.category} game designed by {review.designer}</p>
                 <p>Comments: {review.comment_count}</p>
-                <p>Votes: {review.votes} </p>
+                <p>Votes: {review.votes}<button onClick={() => voteOnReview(review.review_id)}>
+                                    <span aria-label="votes for this review">▲</span>
+                                    </button></p>
                 <p> Review left by {review.owner} on {review.created_at}</p>
             </header>
             </>
