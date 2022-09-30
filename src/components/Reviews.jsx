@@ -33,7 +33,7 @@ const Reviews = ({category, setCategory}) => {
                             <p>{review.review_body}</p>
                             <p>Category: {review.category}</p>
                             <p>Comments: {review.comment_count}</p>
-                            <p>Votes: {review.votes} </p>
+                            <p>Votes: {review.votes}</p>
                             <p>{review.created_at}</p>
                     </li>
                 )
