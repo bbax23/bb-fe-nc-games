@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
+import AddComment from "./AddComment"
 
 const Comments = ({review_id}) => {
 
@@ -16,6 +17,7 @@ const Comments = ({review_id}) => {
         <>
         <ul>
             <h2>Comments</h2>
+            <AddComment review_id={review_id} setComments={setComments} />
             {comments.map((comment) => {
                 return (
                     <li key={comment.comment_id}>
