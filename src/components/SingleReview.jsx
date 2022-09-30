@@ -30,8 +30,9 @@ const Review = () => {
         axios.patch(`https://be-games-example-api.herokuapp.com/api/reviews/${review.review_id}`, reqBody).then(({data}) => {
             console.log("vote occurred")
         }).catch((err) => {
+            setError("Try again later")
             setReview((review) => {
-                return {...review, votes: review.votes - 1}
+                return error, {...review, votes: review.votes - 1}
             })
         })
     }
